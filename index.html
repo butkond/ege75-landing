@@ -17,43 +17,51 @@
         }
 
         :root {
-            --bg: #fafafa;
+            --bg: #ffffff;
+            --bg-alt: #f7f9fc;
             --bg-card: #ffffff;
-            --bg-card-alt: #f4f4f5;
-            --text: #18181b;
-            --text-secondary: #52525b;
-            --text-muted: #a1a1aa;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --accent-light: #dbeafe;
-            --border: #e4e4e7;
-            --success: #16a34a;
-            --success-bg: #f0fdf4;
-            --danger: #dc2626;
-            --danger-light: #fef2f2;
+            --bg-card-alt: #f0f4f8;
+            --text: #1b2434;
+            --text-secondary: #4a5568;
+            --text-muted: #94a3b8;
+            --accent: #2b6cb0;
+            --accent-hover: #1e528a;
+            --accent-light: #ebf2fa;
+            --accent-soft: #3b82c4;
+            --border: #dfe6ee;
+            --success: #2b7a5c;
+            --success-bg: #edf7f2;
+            --danger: #c0392b;
+            --danger-light: #fdf0ee;
             --radius: 10px;
             --radius-sm: 6px;
-            --shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, .07);
+            --shadow: 0 1px 3px rgba(27, 36, 52, .06), 0 1px 2px rgba(27, 36, 52, .04);
+            --shadow-md: 0 4px 16px rgba(27, 36, 52, .08);
+            --shadow-lg: 0 8px 30px rgba(27, 36, 52, .1);
             --transition: .2s ease;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #09090b;
-                --bg-card: #18181b;
-                --bg-card-alt: #1e1e22;
-                --text: #fafafa;
-                --text-secondary: #a1a1aa;
-                --text-muted: #71717a;
-                --accent: #3b82f6;
-                --accent-hover: #60a5fa;
-                --accent-light: #1e3a5f;
-                --border: #27272a;
-                --success-bg: #052e16;
-                --danger-light: #2a0a0a;
-                --shadow: 0 1px 3px rgba(0, 0, 0, .3);
-                --shadow-md: 0 4px 12px rgba(0, 0, 0, .4);
+                --bg: #0f1219;
+                --bg-alt: #151a24;
+                --bg-card: #1a2030;
+                --bg-card-alt: #1f2738;
+                --text: #e8ecf2;
+                --text-secondary: #a0aec0;
+                --text-muted: #5a6a80;
+                --accent: #5a9fd4;
+                --accent-hover: #7bb8e8;
+                --accent-light: #1a2d42;
+                --accent-soft: #4a8fc4;
+                --border: #2a3448;
+                --success: #48bb78;
+                --success-bg: #1a2e24;
+                --danger: #e06050;
+                --danger-light: #2e1a18;
+                --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, .4);
+                --shadow-lg: 0 8px 30px rgba(0, 0, 0, .5);
             }
         }
 
@@ -97,7 +105,13 @@
             z-index: 100;
             background: var(--bg);
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(8px);
+        }
+
+        @supports (backdrop-filter: blur(12px)) {
+            .header {
+                background: color-mix(in srgb, var(--bg) 88%, transparent);
+                backdrop-filter: blur(12px);
+            }
         }
 
         .header .container {
@@ -131,7 +145,7 @@
         }
 
         .nav a:hover {
-            color: var(--text);
+            color: var(--accent);
         }
 
         .nav-toggle {
@@ -170,9 +184,21 @@
             }
         }
 
+        /* ===== TRUST STRIP ===== */
+        .trust-strip {
+            background: var(--accent-light);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+            text-align: center;
+            font-size: .82rem;
+            color: var(--text-secondary);
+            letter-spacing: .01em;
+        }
+
         /* ===== HERO ===== */
         .hero {
             padding: 80px 0 60px;
+            background: var(--bg);
         }
 
         @media (max-width: 640px) {
@@ -186,7 +212,7 @@
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -.02em;
-            max-width: 700px;
+            max-width: 720px;
         }
 
         .hero h1 span {
@@ -217,8 +243,7 @@
             color: var(--text);
         }
 
-        .hero-bullets li::before {
-            content: "";
+        .bullet-dot {
             flex-shrink: 0;
             width: 20px;
             height: 20px;
@@ -247,21 +272,23 @@
             cursor: pointer;
             transition: all var(--transition);
             text-align: center;
+            line-height: 1.3;
         }
 
         .btn-primary {
             background: var(--accent);
             color: #fff;
+            box-shadow: 0 2px 8px rgba(43, 108, 176, .2);
         }
 
         .btn-primary:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 16px rgba(43, 108, 176, .25);
         }
 
         .btn-secondary {
-            background: var(--bg-card-alt);
+            background: var(--bg-card);
             color: var(--text);
             border: 1px solid var(--border);
         }
@@ -269,6 +296,7 @@
         .btn-secondary:hover {
             border-color: var(--accent);
             color: var(--accent);
+            background: var(--accent-light);
         }
 
         .hero-disclaimer {
@@ -282,6 +310,10 @@
         /* ===== SECTIONS ===== */
         section {
             padding: 72px 0;
+        }
+
+        .section-alt {
+            background: var(--bg-alt);
         }
 
         @media (max-width: 640px) {
@@ -341,8 +373,16 @@
             margin-bottom: 16px;
         }
 
+        .fit-card.yes {
+            border-left: 3px solid var(--success);
+        }
+
         .fit-card.yes h3 {
             color: var(--success);
+        }
+
+        .fit-card.no {
+            border-left: 3px solid var(--danger);
         }
 
         .fit-card.no h3 {
@@ -406,7 +446,12 @@
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: var(--shadow);
-            position: relative;
+            transition: box-shadow var(--transition), transform var(--transition);
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .step-num {
@@ -476,7 +521,7 @@
         }
 
         .screen-placeholder {
-            background: var(--bg-card-alt);
+            background: var(--bg-card);
             border: 1px dashed var(--border);
             border-radius: var(--radius);
             aspect-ratio: 4/3;
@@ -485,6 +530,7 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
+            box-shadow: var(--shadow);
         }
 
         .screen-placeholder span {
@@ -518,6 +564,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+            box-shadow: var(--shadow);
         }
 
         .video-placeholder span {
@@ -571,11 +618,21 @@
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
+            transition: box-shadow var(--transition), transform var(--transition);
+        }
+
+        .tariff-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .tariff-card.featured {
             border-color: var(--accent);
             box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+        }
+
+        .tariff-card.featured:hover {
+            box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg);
         }
 
         .tariff-badge {
@@ -642,7 +699,7 @@
             margin-top: 36px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 8px;
         }
 
         .faq-item {
@@ -650,10 +707,7 @@
             border-radius: var(--radius-sm);
             background: var(--bg-card);
             overflow: hidden;
-        }
-
-        .faq-item+.faq-item {
-            margin-top: 8px;
+            box-shadow: var(--shadow);
         }
 
         .faq-trigger {
@@ -670,11 +724,12 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            transition: background var(--transition);
+            transition: background var(--transition), color var(--transition);
         }
 
         .faq-trigger:hover {
-            background: var(--bg-card-alt);
+            background: var(--accent-light);
+            color: var(--accent);
         }
 
         .faq-trigger::after {
@@ -682,12 +737,17 @@
             font-size: 1.3rem;
             font-weight: 300;
             color: var(--text-muted);
-            transition: transform var(--transition);
+            transition: transform var(--transition), color var(--transition);
             flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-trigger {
+            color: var(--accent);
         }
 
         .faq-item.open .faq-trigger::after {
             transform: rotate(45deg);
+            color: var(--accent);
         }
 
         .faq-body {
@@ -712,7 +772,7 @@
             max-width: 520px;
         }
 
-        .signup-wrap p {
+        .signup-wrap>p {
             margin-top: 12px;
             color: var(--text-secondary);
             font-size: .95rem;
@@ -749,7 +809,11 @@
             border-radius: var(--radius-sm);
             background: var(--bg-card);
             color: var(--text);
-            transition: border-color var(--transition);
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .field input::placeholder {
+            color: var(--text-muted);
         }
 
         .field input:focus,
@@ -841,17 +905,14 @@
             font-size: .8rem;
             color: var(--text-muted);
         }
-
-        /* ===== DIVIDER ===== */
-        .divider {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 0;
-        }
     </style>
 </head>
 
 <body>
+
+    <div class="trust-strip">
+        Бесплатная диагностика — определим уровень и подберём группу до начала занятий
+    </div>
 
     <header class="header" role="banner">
         <div class="container">
@@ -881,9 +942,12 @@
                     экзамена.</p>
 
                 <ul class="hero-bullets" role="list">
-                    <li>Группы 5-7 человек, подобранные по уровню после диагностики</li>
-                    <li>Теория сразу в практику: алгоритмы "делай раз-два-три" для каждого типа задач</li>
-                    <li>Персональная статистика: темы, ошибки, динамика — видно, где именно буксуете</li>
+                    <li><span class="bullet-dot" aria-hidden="true"></span>Группы 5-7 человек, подобранные по уровню
+                        после диагностики</li>
+                    <li><span class="bullet-dot" aria-hidden="true"></span>Теория сразу в практику: алгоритмы "делай
+                        раз-два-три" для каждого типа задач</li>
+                    <li><span class="bullet-dot" aria-hidden="true"></span>Персональная статистика: темы, ошибки,
+                        динамика — видно, где именно буксуете</li>
                 </ul>
 
                 <div class="hero-cta">
@@ -897,10 +961,8 @@
             </div>
         </section>
 
-        <hr class="divider">
-
         <!-- FIT -->
-        <section aria-labelledby="fit-heading">
+        <section class="section-alt" aria-labelledby="fit-heading">
             <div class="container">
                 <p class="section-label">Для кого</p>
                 <h2 class="section-title" id="fit-heading">Подойдёт вам или нет — честно</h2>
@@ -927,8 +989,6 @@
                 </div>
             </div>
         </section>
-
-        <hr class="divider">
 
         <!-- HOW IT WORKS -->
         <section id="how" aria-labelledby="how-heading">
@@ -965,10 +1025,8 @@
             </div>
         </section>
 
-        <hr class="divider">
-
         <!-- PROGRESS -->
-        <section id="progress" aria-labelledby="progress-heading">
+        <section id="progress" class="section-alt" aria-labelledby="progress-heading">
             <div class="container">
                 <p class="section-label">Контроль прогресса</p>
                 <h2 class="section-title" id="progress-heading">Вы всегда знаете, где находитесь</h2>
@@ -998,8 +1056,6 @@
                 </div>
             </div>
         </section>
-
-        <hr class="divider">
 
         <!-- VIDEO -->
         <section id="video" aria-labelledby="video-heading">
@@ -1033,10 +1089,8 @@
             </div>
         </section>
 
-        <hr class="divider">
-
         <!-- TARIFFS -->
-        <section aria-labelledby="tariff-heading">
+        <section class="section-alt" aria-labelledby="tariff-heading">
             <div class="container">
                 <p class="section-label">Тарифы</p>
                 <h2 class="section-title" id="tariff-heading">Выберите формат под себя</h2>
@@ -1085,8 +1139,6 @@
                 </div>
             </div>
         </section>
-
-        <hr class="divider">
 
         <!-- FAQ -->
         <section aria-labelledby="faq-heading">
@@ -1161,10 +1213,8 @@
             </div>
         </section>
 
-        <hr class="divider">
-
         <!-- SIGNUP -->
-        <section id="signup" class="signup" aria-labelledby="signup-heading">
+        <section id="signup" class="signup section-alt" aria-labelledby="signup-heading">
             <div class="container">
                 <div class="signup-wrap">
                     <p class="section-label">Запись</p>
@@ -1231,7 +1281,6 @@
         (function () {
             'use strict';
 
-            // Mobile nav toggle
             var navToggle = document.querySelector('.nav-toggle');
             var nav = document.querySelector('.nav');
             if (navToggle && nav) {
@@ -1239,7 +1288,6 @@
                     var open = nav.classList.toggle('open');
                     navToggle.setAttribute('aria-expanded', open);
                 });
-                // Close nav on link click
                 nav.querySelectorAll('a').forEach(function (link) {
                     link.addEventListener('click', function () {
                         nav.classList.remove('open');
@@ -1248,7 +1296,6 @@
                 });
             }
 
-            // FAQ accordion
             document.querySelectorAll('.faq-trigger').forEach(function (btn) {
                 btn.addEventListener('click', function () {
                     var item = btn.closest('.faq-item');
@@ -1256,7 +1303,6 @@
                     var inner = item.querySelector('.faq-body-inner');
                     var isOpen = item.classList.contains('open');
 
-                    // Close all
                     document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
                         openItem.classList.remove('open');
                         openItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
@@ -1271,7 +1317,6 @@
                 });
             });
 
-            // Form validation and submission
             var form = document.getElementById('signup-form');
             var success = document.getElementById('form-success');
             var resultText = document.getElementById('form-result-text');
@@ -1303,7 +1348,6 @@
                     var cls = form.querySelector('[name="class"]').value;
                     var goal = form.querySelector('[name="goal"]').value.trim() || 'не указана';
                     var contact = form.querySelector('[name="contact"]').value.trim();
-
                     var classLabel = cls === 'gap' ? 'Выпускник (пересдача)' : cls + ' класс';
 
                     var text = 'Заявка на диагностику (ЕГЭ по математике)\n'
@@ -1319,18 +1363,12 @@
                     success.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
 
-                // Remove error on input
                 form.querySelectorAll('[required]').forEach(function (field) {
-                    field.addEventListener('input', function () {
-                        field.classList.remove('error');
-                    });
-                    field.addEventListener('change', function () {
-                        field.classList.remove('error');
-                    });
+                    field.addEventListener('input', function () { field.classList.remove('error'); });
+                    field.addEventListener('change', function () { field.classList.remove('error'); });
                 });
             }
 
-            // Copy to clipboard
             if (btnCopy) {
                 btnCopy.addEventListener('click', function () {
                     var text = resultText.textContent;
@@ -1340,7 +1378,6 @@
                             setTimeout(function () { btnCopy.textContent = 'Скопировать текст'; }, 2000);
                         });
                     } else {
-                        // Fallback
                         var ta = document.createElement('textarea');
                         ta.value = text;
                         ta.style.position = 'fixed';
@@ -1356,24 +1393,23 @@
                     }
                 });
             }
-
         })();
     </script>
 
     <!--
   ЧТО НУЖНО УТОЧНИТЬ ПЕРЕД ПУБЛИКАЦИЕЙ:
-  1. [цена] — стоимость каждого тарифа (База / Стандарт / Макс)
+  1. [цена] — стоимость каждого тарифа (Самостоятельно / С группой / Максимум контроля)
   2. [расписание] — дни и время занятий, частота пробников
   3. [дата старта] — дата старта ближайшего потока
-  4. [видео] — ссылка на фрагмент занятия (YouTube/VK Video/Rutube embed)
+  4. [видео] — ссылка на фрагмент занятия (YouTube / VK Video / Rutube embed)
   5. [телеграм] — ссылка на Telegram-канал или аккаунт для связи
   6. [контакт] — email, телефон или другой способ связи
-  7. Скриншоты отчётов: заменить плейсхолдеры реальными изображениями (отчёт по темам, папка ошибок, динамика пробников)
-  8. Уточнить: есть ли записи занятий и возможность просмотра на ускоренной скорости (2x) — если да, добавить в тарифы
-  9. Уточнить формулировку по пропущенным занятиям в FAQ (запись доступна? на какой срок?)
-  10. Юридические данные: ИП/ООО, оферта, политика конфиденциальности для формы сбора данных
-  11. Подключить серверную обработку формы или интеграцию с CRM/Telegram-ботом
-  12. Название проекта (сейчас "ЕГЭматем" — плейсхолдер, заменить на реальное)
+  7. Скриншоты отчётов: заменить плейсхолдеры реальными изображениями
+  8. Уточнить: есть ли записи занятий и возможность просмотра на 2x
+  9. Уточнить формулировку по пропущенным занятиям в FAQ
+  10. Юридические данные: ИП/ООО, оферта, политика конфиденциальности
+  11. Подключить серверную обработку формы или интеграцию с CRM / Telegram-ботом
+  12. Название проекта (сейчас "ЕГЭматем" — плейсхолдер)
 -->
 
 </body>
