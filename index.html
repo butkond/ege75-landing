@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ по математике на 75+ — подготовка в малых группах</title>
+    <meta name="description"
+        content="Подготовка к ЕГЭ по математике с ориентиром на 75+ баллов. Малые группы 5-7 человек, семинары с практикой, персональный контроль прогресса.">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #fafafa;
+            --bg-card: #ffffff;
+            --bg-card-alt: #f4f4f5;
+            --text: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: #dbeafe;
+            --border: #e4e4e7;
+            --success: #16a34a;
+            --success-bg: #f0fdf4;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --radius: 10px;
+            --radius-sm: 6px;
+            --shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, .07);
+            --transition: .2s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #09090b;
+                --bg-card: #18181b;
+                --bg-card-alt: #1e1e22;
+                --text: #fafafa;
+                --text-secondary: #a1a1aa;
+                --text-muted: #71717a;
+                --accent: #3b82f6;
+                --accent-hover: #60a5fa;
+                --accent-light: #1e3a5f;
+                --border: #27272a;
+                --success-bg: #052e16;
+                --danger-light: #2a0a0a;
+                --shadow: 0 1px 3px rgba(0, 0, 0, .3);
+                --shadow-md: 0 4px 12px rgba(0, 0, 0, .4);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav a {
+            font-size: .9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--text);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--text);
+        }
+
+        .nav-toggle svg {
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 20px;
+                gap: 16px;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 80px 0 60px;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 48px 0 40px;
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -.02em;
+            max-width: 700px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            margin-top: 16px;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            line-height: 1.5;
+        }
+
+        .hero-bullets {
+            margin-top: 32px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hero-bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .hero-bullets li::before {
+            content: "";
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            border: 2px solid var(--accent);
+        }
+
+        .hero-cta {
+            margin-top: 36px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: .95rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-disclaimer {
+            margin-top: 20px;
+            font-size: .8rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.5;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 72px 0;
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 48px 0;
+            }
+        }
+
+        .section-label {
+            font-size: .8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -.01em;
+        }
+
+        .section-desc {
+            margin-top: 12px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-size: 1rem;
+        }
+
+        /* ===== FIT / NOT FIT ===== */
+        .fit-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .fit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .fit-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .fit-card.yes h3 {
+            color: var(--success);
+        }
+
+        .fit-card.no h3 {
+            color: var(--danger);
+        }
+
+        .fit-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fit-card ul li {
+            font-size: .93rem;
+            color: var(--text-secondary);
+            padding-left: 22px;
+            position: relative;
+            line-height: 1.45;
+        }
+
+        .fit-card.yes ul li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .fit-card.no ul li::before {
+            content: "\2013";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        /* ===== STEPS ===== */
+        .steps {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 800px) {
+            .steps {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: .85rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .step-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            font-size: .88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ===== PROGRESS ===== */
+        .progress-features {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .progress-features li {
+            font-size: .95rem;
+            color: var(--text-secondary);
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .progress-features li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--accent);
+        }
+
+        .progress-screens {
+            margin-top: 36px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .progress-screens {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .screen-placeholder {
+            background: var(--bg-card-alt);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .screen-placeholder span {
+            font-size: .85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== VIDEO ===== */
+        .video-block {
+            margin-top: 36px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        @media (max-width: 700px) {
+            .video-block {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-placeholder {
+            background: var(--bg-card-alt);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            aspect-ratio: 16/9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .video-placeholder span {
+            font-size: .9rem;
+            color: var(--text-muted);
+        }
+
+        .video-placeholder a {
+            font-weight: 600;
+        }
+
+        .video-points {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video-points li {
+            font-size: .95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .video-points li strong {
+            display: block;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        /* ===== TARIFFS ===== */
+        .tariffs {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 700px) {
+            .tariffs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tariff-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tariff-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+        }
+
+        .tariff-badge {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            background: var(--accent);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .tariff-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .tariff-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .tariff-price span {
+            font-size: .85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .tariff-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+
+        .tariff-card ul li {
+            font-size: .88rem;
+            color: var(--text-secondary);
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.45;
+        }
+
+        .tariff-card ul li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: .8rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            overflow: hidden;
+        }
+
+        .faq-item+.faq-item {
+            margin-top: 8px;
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 20px;
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--text);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: background var(--transition);
+        }
+
+        .faq-trigger:hover {
+            background: var(--bg-card-alt);
+        }
+
+        .faq-trigger::after {
+            content: "+";
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            transition: transform var(--transition);
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-trigger::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+
+        .faq-body-inner {
+            padding: 0 20px 18px;
+            font-size: .9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== SIGNUP ===== */
+        .signup {
+            padding: 72px 0 80px;
+        }
+
+        .signup-wrap {
+            max-width: 520px;
+        }
+
+        .signup-wrap p {
+            margin-top: 12px;
+            color: var(--text-secondary);
+            font-size: .95rem;
+        }
+
+        .form {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .field label .req {
+            color: var(--danger);
+        }
+
+        .field input,
+        .field select {
+            padding: 12px 14px;
+            font-size: .95rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            color: var(--text);
+            transition: border-color var(--transition);
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .field input.error,
+        .field select.error {
+            border-color: var(--danger);
+        }
+
+        .field .field-error {
+            font-size: .78rem;
+            color: var(--danger);
+            display: none;
+        }
+
+        .field input.error~.field-error,
+        .field select.error~.field-error {
+            display: block;
+        }
+
+        .form-submit {
+            margin-top: 4px;
+        }
+
+        .form-success {
+            display: none;
+            background: var(--success-bg);
+            border: 1px solid var(--success);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .form-success h3 {
+            color: var(--success);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .form-success p {
+            font-size: .9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .form-success pre {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            font-size: .82rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+
+        .btn-copy {
+            background: var(--accent);
+            color: #fff;
+            font-size: .85rem;
+            padding: 10px 20px;
+        }
+
+        .btn-copy:hover {
+            background: var(--accent-hover);
+        }
+
+        .tg-link {
+            margin-top: 12px;
+            font-size: .9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            text-align: center;
+            font-size: .8rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header" role="banner">
+        <div class="container">
+            <a href="#" class="logo" aria-label="На главную">ЕГЭ<span>матем</span></a>
+            <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+            <nav class="nav" id="main-nav" role="navigation">
+                <a href="#how">Как устроено</a>
+                <a href="#progress">Контроль</a>
+                <a href="#signup">Записаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <h1 id="hero-heading">ЕГЭ по математике <span>на 75+ баллов</span> — план, а не случайность</h1>
+                <p class="hero-sub">Малые группы, семинары вместо лекций и система, которая находит ваши пробелы раньше
+                    экзамена.</p>
+
+                <ul class="hero-bullets" role="list">
+                    <li>Группы 5-7 человек, подобранные по уровню после диагностики</li>
+                    <li>Теория сразу в практику: алгоритмы "делай раз-два-три" для каждого типа задач</li>
+                    <li>Персональная статистика: темы, ошибки, динамика — видно, где именно буксуете</li>
+                </ul>
+
+                <div class="hero-cta">
+                    <a href="#signup" class="btn btn-primary" data-cta="hero_primary">Записаться на диагностику</a>
+                    <a href="#video" class="btn btn-secondary" data-cta="hero_secondary">Посмотреть, как объясняем</a>
+                </div>
+
+                <p class="hero-disclaimer">75 баллов — ориентир подготовки, а не гарантия. Итоговый результат зависит от
+                    вашего уровня на старте, регулярности занятий и целей. Программа адаптируется под конкретный вуз и
+                    направление.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- FIT -->
+        <section aria-labelledby="fit-heading">
+            <div class="container">
+                <p class="section-label">Для кого</p>
+                <h2 class="section-title" id="fit-heading">Подойдёт вам или нет — честно</h2>
+
+                <div class="fit-grid">
+                    <div class="fit-card yes">
+                        <h3>Подойдёт</h3>
+                        <ul role="list">
+                            <li>Нужен конкретный результат для поступления, а не "просто позаниматься"</li>
+                            <li>Готовы выделять время на домашние задания и пробники</li>
+                            <li>Хотите понимать, где именно теряете баллы, и закрывать пробелы системно</li>
+                            <li>Устали от подготовки "обо всём и ни о чём" — нужен фокус на экзамен</li>
+                        </ul>
+                    </div>
+                    <div class="fit-card no">
+                        <h3>Не подойдёт</h3>
+                        <ul role="list">
+                            <li>Ищете "волшебную таблетку" без собственных усилий</li>
+                            <li>Нужен только индивидуальный формат один на один</li>
+                            <li>Не готовы делать домашние задания и писать пробники</li>
+                            <li>Математика нужна на базовом уровне (у нас фокус на профильную)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- HOW IT WORKS -->
+        <section id="how" aria-labelledby="how-heading">
+            <div class="container">
+                <p class="section-label">Как устроено</p>
+                <h2 class="section-title" id="how-heading">Четыре шага от "не знаю, с чего начать" до результата</h2>
+
+                <div class="steps">
+                    <div class="step-card">
+                        <div class="step-num" aria-hidden="true">1</div>
+                        <h3>Диагностика</h3>
+                        <p>Бесплатное тестирование: определяем текущий уровень, находим пробелы и сильные стороны. Без
+                            этого нет смысла начинать.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num" aria-hidden="true">2</div>
+                        <h3>Группа по уровню</h3>
+                        <p>Попадаете к тем, кто на вашем уровне. Не тормозите из-за отстающих, не тонете среди
+                            продвинутых. 5-7 человек максимум.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num" aria-hidden="true">3</div>
+                        <h3>Семинары</h3>
+                        <p>Не лекции. Короткая теория — сразу решаем. Алгоритмы для каждого типа задач: что делать на
+                            экзамене, когда стресс и время тикает.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num" aria-hidden="true">4</div>
+                        <h3>Контроль</h3>
+                        <p>Регулярные пробники, чекпоинты, разбор ошибок. Видите свой прогресс в цифрах. Преподаватель
+                            видит, где вы буксуете.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- PROGRESS -->
+        <section id="progress" aria-labelledby="progress-heading">
+            <div class="container">
+                <p class="section-label">Контроль прогресса</p>
+                <h2 class="section-title" id="progress-heading">Вы всегда знаете, где находитесь</h2>
+                <p class="section-desc">Не "ощущение, что вроде стало лучше", а конкретные данные. Какие темы закрыты,
+                    где ошибки повторяются, как растёт балл от пробника к пробнику.</p>
+
+                <ul class="progress-features" role="list">
+                    <li>Персональная статистика по каждой теме: процент освоения, типичные ошибки</li>
+                    <li>"Папка ошибок" — задачи, в которых ошиблись, собираются автоматически для повторной проработки
+                    </li>
+                    <li>Динамика пробников: видно, как меняется балл и в каких заданиях</li>
+                    <li>Домашние задания по уровням: базовый, стандартный, продвинутый — выбираете или получаете
+                        рекомендацию</li>
+                    <li>Обратная связь от преподавателя после каждого чекпоинта</li>
+                </ul>
+
+                <div class="progress-screens" role="group" aria-label="Примеры отчётов">
+                    <div class="screen-placeholder" role="img" aria-label="Пример отчёта по темам">
+                        <span>Отчёт по темам<br>и проценту освоения</span>
+                    </div>
+                    <div class="screen-placeholder" role="img" aria-label="Пример папки ошибок">
+                        <span>Папка ошибок:<br>задачи для повторной<br>проработки</span>
+                    </div>
+                    <div class="screen-placeholder" role="img" aria-label="Пример динамики пробников">
+                        <span>Динамика пробников:<br>балл, задания,<br>тренд</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- VIDEO -->
+        <section id="video" aria-labelledby="video-heading">
+            <div class="container">
+                <p class="section-label">Посмотрите до оплаты</p>
+                <h2 class="section-title" id="video-heading">Как мы объясняем — фрагмент занятия</h2>
+
+                <div class="video-block">
+                    <div class="video-placeholder" role="img" aria-label="Видео-фрагмент занятия">
+                        <span>Фрагмент занятия</span>
+                        <a href="[видео]" data-cta="video_play">Смотреть видео [видео]</a>
+                    </div>
+                    <ul class="video-points" role="list">
+                        <li>
+                            <strong>Без воды</strong>
+                            Только то, что нужно для экзамена. Теория ровно в том объёме, чтобы решать задачи, а не
+                            писать диссертацию.
+                        </li>
+                        <li>
+                            <strong>Алгоритм "раз-два-три"</strong>
+                            Каждый тип задач разбирается как последовательность шагов. Увидели задачу — знаете, что
+                            делать.
+                        </li>
+                        <li>
+                            <strong>Фокус на экзамен</strong>
+                            Учим не математику вообще, а математику для ЕГЭ: распределение времени, оформление, типичные
+                            ловушки.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- TARIFFS -->
+        <section aria-labelledby="tariff-heading">
+            <div class="container">
+                <p class="section-label">Тарифы</p>
+                <h2 class="section-title" id="tariff-heading">Выберите формат под себя</h2>
+                <p class="section-desc">Все тарифы включают диагностику и доступ к материалам. Разница — в уровне
+                    сопровождения.</p>
+
+                <div class="tariffs">
+                    <div class="tariff-card">
+                        <h3>Самостоятельно</h3>
+                        <div class="tariff-price">[цена] <span>/ мес</span></div>
+                        <ul role="list">
+                            <li>Доступ к записям семинаров</li>
+                            <li>Домашние задания с автопроверкой</li>
+                            <li>Персональная статистика и папка ошибок</li>
+                            <li>Пробники раз в [расписание]</li>
+                        </ul>
+                        <a href="#signup" class="btn btn-secondary" data-cta="tariff_base">Записаться</a>
+                    </div>
+
+                    <div class="tariff-card featured">
+                        <div class="tariff-badge">Популярный</div>
+                        <h3>С группой</h3>
+                        <div class="tariff-price">[цена] <span>/ мес</span></div>
+                        <ul role="list">
+                            <li>Всё из "Самостоятельно"</li>
+                            <li>Живые семинары в группе 5-7 человек</li>
+                            <li>Разбор домашних заданий с преподавателем</li>
+                            <li>Возможность задать вопрос на занятии</li>
+                            <li>Чекпоинты с обратной связью</li>
+                        </ul>
+                        <a href="#signup" class="btn btn-primary" data-cta="tariff_standard">Записаться</a>
+                    </div>
+
+                    <div class="tariff-card">
+                        <h3>Максимум контроля</h3>
+                        <div class="tariff-price">[цена] <span>/ мес</span></div>
+                        <ul role="list">
+                            <li>Всё из "С группой"</li>
+                            <li>Индивидуальный разбор ошибок после каждого пробника</li>
+                            <li>Куратор: контроль выполнения ДЗ и прогресса</li>
+                            <li>Дополнительные консультации по сложным темам</li>
+                            <li>Приоритетная обратная связь</li>
+                        </ul>
+                        <a href="#signup" class="btn btn-secondary" data-cta="tariff_max">Записаться</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- FAQ -->
+        <section aria-labelledby="faq-heading">
+            <div class="container">
+                <p class="section-label">Вопросы</p>
+                <h2 class="section-title" id="faq-heading">Частые вопросы</h2>
+
+                <div class="faq-list" role="list">
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">С какого уровня можно начать?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">С любого, на котором вы сейчас. Для этого и нужна диагностика:
+                                мы определяем ваш текущий уровень и подбираем группу. Кто-то стартует с базовых задач
+                                первой части, кто-то — сразу работает над второй. Главное условие — готовность регулярно
+                                заниматься.</div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">Сколько времени в неделю нужно?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">Занятия в группе — [расписание]. Плюс домашние задания: в
+                                среднем 3-5 часов в неделю в зависимости от уровня и тарифа. Мы даём уровневые ДЗ, чтобы
+                                вы тратили время на то, что реально нужно, а не решали задачи, которые и так умеете.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">Если уже есть репетитор — зачем
+                            группа?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">Репетитор хорош для точечной работы. Группа даёт другое: систему
+                                подготовки, регулярные пробники в экзаменационных условиях, сравнение с другими,
+                                дисциплину. Многие совмещают: репетитор закрывает конкретные темы, а группа держит темп
+                                и даёт структуру. Но наша система контроля — папка ошибок, уровневые группы, обратная
+                                связь — часто закрывает те же задачи, что и репетитор.</div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">Как вы обеспечиваете внимание каждому в группе
+                            5-7 человек?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">Во-первых, 5-7 человек — это не 30. Преподаватель видит каждого.
+                                Во-вторых, группы подобраны по уровню, поэтому все работают над похожими задачами.
+                                В-третьих, персональная статистика и папка ошибок показывают преподавателю, где
+                                конкретно буксует каждый ученик. Это не "один объясняет — все слушают", а семинар, где
+                                каждый решает и получает обратную связь.</div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">Можно ли посмотреть урок до оплаты?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">Да. На странице выше есть фрагмент занятия — посмотрите, как мы
+                                объясняем. Также диагностика бесплатная: вы пройдёте тест, получите разбор результатов и
+                                поймёте, подходит ли вам формат, до того как заплатите.</div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-trigger" aria-expanded="false">Что если пропустил занятие?</button>
+                        <div class="faq-body" role="region">
+                            <div class="faq-body-inner">Запись занятия будет доступна [опционально: в ускоренном
+                                формате]. Домашнее задание и материалы — тоже. Но мы рекомендуем не пропускать: живое
+                                участие в семинаре и возможность задать вопрос в моменте — это то, ради чего формат
+                                работает.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- SIGNUP -->
+        <section id="signup" class="signup" aria-labelledby="signup-heading">
+            <div class="container">
+                <div class="signup-wrap">
+                    <p class="section-label">Запись</p>
+                    <h2 class="section-title" id="signup-heading">Запишитесь на бесплатную диагностику</h2>
+                    <p>Определим ваш уровень, покажем, где теряете баллы, и подберём группу. Без обязательств.</p>
+
+                    <form class="form" id="signup-form" novalidate>
+                        <div class="field">
+                            <label for="f-name">Имя <span class="req" aria-label="обязательное поле">*</span></label>
+                            <input type="text" id="f-name" name="name" required autocomplete="given-name"
+                                placeholder="Как к вам обращаться">
+                            <span class="field-error">Укажите имя</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-class">Класс <span class="req" aria-label="обязательное поле">*</span></label>
+                            <select id="f-class" name="class" required>
+                                <option value="" disabled selected>Выберите</option>
+                                <option value="10">10 класс</option>
+                                <option value="11">11 класс</option>
+                                <option value="gap">Выпускник (пересдача)</option>
+                            </select>
+                            <span class="field-error">Выберите класс</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-goal">Цель / ориентир по баллам</label>
+                            <input type="text" id="f-goal" name="goal"
+                                placeholder="Например: 75+ или поступление в МФТИ">
+                        </div>
+
+                        <div class="field">
+                            <label for="f-contact">Telegram или телефон <span class="req"
+                                    aria-label="обязательное поле">*</span></label>
+                            <input type="text" id="f-contact" name="contact" required placeholder="@username или +7...">
+                            <span class="field-error">Укажите контакт для связи</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit" data-cta="form_submit">Отправить
+                            заявку</button>
+                    </form>
+
+                    <div class="form-success" id="form-success" aria-live="polite">
+                        <h3>Заявка сформирована</h3>
+                        <p>Сервер пока не подключён. Скопируйте текст ниже и отправьте нам в Telegram — мы свяжемся в
+                            течение дня.</p>
+                        <pre id="form-result-text"></pre>
+                        <button class="btn btn-copy" id="btn-copy" type="button" data-cta="copy_to_tg">Скопировать
+                            текст</button>
+                        <p class="tg-link">Отправить в Telegram: <a href="[телеграм]">[телеграм]</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>[контакт] &middot; [телеграм] &middot; [дата старта ближайшего потока]</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // Mobile nav toggle
+            var navToggle = document.querySelector('.nav-toggle');
+            var nav = document.querySelector('.nav');
+            if (navToggle && nav) {
+                navToggle.addEventListener('click', function () {
+                    var open = nav.classList.toggle('open');
+                    navToggle.setAttribute('aria-expanded', open);
+                });
+                // Close nav on link click
+                nav.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        nav.classList.remove('open');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            // FAQ accordion
+            document.querySelectorAll('.faq-trigger').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var item = btn.closest('.faq-item');
+                    var body = item.querySelector('.faq-body');
+                    var inner = item.querySelector('.faq-body-inner');
+                    var isOpen = item.classList.contains('open');
+
+                    // Close all
+                    document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+                        openItem.classList.remove('open');
+                        openItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+                        openItem.querySelector('.faq-body').style.maxHeight = '0';
+                    });
+
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                        body.style.maxHeight = inner.scrollHeight + 20 + 'px';
+                    }
+                });
+            });
+
+            // Form validation and submission
+            var form = document.getElementById('signup-form');
+            var success = document.getElementById('form-success');
+            var resultText = document.getElementById('form-result-text');
+            var btnCopy = document.getElementById('btn-copy');
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var valid = true;
+                    var fields = form.querySelectorAll('[required]');
+
+                    fields.forEach(function (field) {
+                        var val = field.value.trim();
+                        if (!val) {
+                            field.classList.add('error');
+                            valid = false;
+                        } else {
+                            field.classList.remove('error');
+                        }
+                    });
+
+                    if (!valid) {
+                        var firstError = form.querySelector('.error');
+                        if (firstError) firstError.focus();
+                        return;
+                    }
+
+                    var name = form.querySelector('[name="name"]').value.trim();
+                    var cls = form.querySelector('[name="class"]').value;
+                    var goal = form.querySelector('[name="goal"]').value.trim() || 'не указана';
+                    var contact = form.querySelector('[name="contact"]').value.trim();
+
+                    var classLabel = cls === 'gap' ? 'Выпускник (пересдача)' : cls + ' класс';
+
+                    var text = 'Заявка на диагностику (ЕГЭ по математике)\n'
+                        + '---\n'
+                        + 'Имя: ' + name + '\n'
+                        + 'Класс: ' + classLabel + '\n'
+                        + 'Цель: ' + goal + '\n'
+                        + 'Контакт: ' + contact;
+
+                    resultText.textContent = text;
+                    form.style.display = 'none';
+                    success.classList.add('show');
+                    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                // Remove error on input
+                form.querySelectorAll('[required]').forEach(function (field) {
+                    field.addEventListener('input', function () {
+                        field.classList.remove('error');
+                    });
+                    field.addEventListener('change', function () {
+                        field.classList.remove('error');
+                    });
+                });
+            }
+
+            // Copy to clipboard
+            if (btnCopy) {
+                btnCopy.addEventListener('click', function () {
+                    var text = resultText.textContent;
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(function () {
+                            btnCopy.textContent = 'Скопировано';
+                            setTimeout(function () { btnCopy.textContent = 'Скопировать текст'; }, 2000);
+                        });
+                    } else {
+                        // Fallback
+                        var ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try {
+                            document.execCommand('copy');
+                            btnCopy.textContent = 'Скопировано';
+                            setTimeout(function () { btnCopy.textContent = 'Скопировать текст'; }, 2000);
+                        } catch (err) { }
+                        document.body.removeChild(ta);
+                    }
+                });
+            }
+
+        })();
+    </script>
+
+    <!--
+  ЧТО НУЖНО УТОЧНИТЬ ПЕРЕД ПУБЛИКАЦИЕЙ:
+  1. [цена] — стоимость каждого тарифа (База / Стандарт / Макс)
+  2. [расписание] — дни и время занятий, частота пробников
+  3. [дата старта] — дата старта ближайшего потока
+  4. [видео] — ссылка на фрагмент занятия (YouTube/VK Video/Rutube embed)
+  5. [телеграм] — ссылка на Telegram-канал или аккаунт для связи
+  6. [контакт] — email, телефон или другой способ связи
+  7. Скриншоты отчётов: заменить плейсхолдеры реальными изображениями (отчёт по темам, папка ошибок, динамика пробников)
+  8. Уточнить: есть ли записи занятий и возможность просмотра на ускоренной скорости (2x) — если да, добавить в тарифы
+  9. Уточнить формулировку по пропущенным занятиям в FAQ (запись доступна? на какой срок?)
+  10. Юридические данные: ИП/ООО, оферта, политика конфиденциальности для формы сбора данных
+  11. Подключить серверную обработку формы или интеграцию с CRM/Telegram-ботом
+  12. Название проекта (сейчас "ЕГЭматем" — плейсхолдер, заменить на реальное)
+-->
+
+</body>
+
+</html>
