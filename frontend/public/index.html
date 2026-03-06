@@ -1196,13 +1196,14 @@
 
                     <form class="form" id="signup-form" novalidate>
                         <div class="field">
-                            <label for="f-name">Имя <span class="req">*</span></label>
+                            <label for="f-name">Имя <span class="req" aria-label="обязательное поле">*</span></label>
                             <input type="text" id="f-name" name="name" required autocomplete="given-name"
                                 placeholder="Как к вам обращаться">
                             <span class="field-error">Укажите имя</span>
                         </div>
+
                         <div class="field">
-                            <label for="f-class">Класс <span class="req">*</span></label>
+                            <label for="f-class">Класс <span class="req" aria-label="обязательное поле">*</span></label>
                             <select id="f-class" name="student_class" required>
                                 <option value="" disabled selected>Выберите</option>
                                 <option value="10">10 класс</option>
@@ -1211,18 +1212,22 @@
                             </select>
                             <span class="field-error">Выберите класс</span>
                         </div>
+
                         <div class="field">
                             <label for="f-goal">Цель / ориентир по баллам</label>
                             <input type="text" id="f-goal" name="goal"
                                 placeholder="Например: 75+ или поступление в МФТИ">
                         </div>
+
                         <div class="field">
-                            <label for="f-contact">Telegram или телефон <span class="req">*</span></label>
+                            <label for="f-contact">Telegram или телефон <span class="req"
+                                    aria-label="обязательное поле">*</span></label>
                             <input type="text" id="f-contact" name="contact" required placeholder="@username или +7...">
                             <span class="field-error">Укажите контакт для связи</span>
                         </div>
-                        <button type="submit" class="btn btn-primary form-submit" id="submit-btn">Отправить
-                            заявку</button>
+
+                        <button type="submit" class="btn btn-primary form-submit" id="submit-btn"
+                            data-cta="form_submit">Отправить заявку</button>
                     </form>
 
                     <!-- Успех -->
@@ -1231,7 +1236,13 @@
                         <p>Мы свяжемся с вами в течение дня, чтобы назначить диагностику.</p>
                     </div>
 
-                    <!-- Ошибка сервера — с fallback -->
+                    <!-- Ошибка валидации -->
+                    <div class="form-status validation-error" id="status-validation" aria-live="polite">
+                        <h3>Проверьте данные</h3>
+                        <p id="validation-message">Пожалуйста, исправьте ошибки в форме и попробуйте снова.</p>
+                    </div>
+
+                    <!-- Ошибка сервера — fallback -->
                     <div class="form-status error" id="status-error" aria-live="polite">
                         <h3>Не удалось отправить</h3>
                         <p>Сервер временно недоступен. Скопируйте текст ниже и отправьте нам в Telegram — мы свяжемся в
@@ -1239,8 +1250,8 @@
                         <div class="fallback-block">
                             <pre id="fallback-text"></pre>
                             <button class="btn btn-copy" id="btn-copy" type="button">Скопировать текст</button>
-                            <p class="tg-link">Отправить в Telegram: <a href="https://t.me/your_bot" target="_blank"
-                                    rel="noopener">@your_bot</a></p>
+                            <p class="tg-link">Отправить в Telegram: <a href="https://t.me/mikhail_ivanyuta"
+                                    target="_blank" rel="noopener">@mikhail_ivanyuta</a></p>
                         </div>
                     </div>
                 </div>
@@ -1250,7 +1261,7 @@
 
     <footer class="footer" role="contentinfo">
         <div class="container">
-            <p>[контакт] · <a href="https://t.me/your_bot">Telegram</a> · [дата старта ближайшего потока]</p>
+            <p>[контакт] &middot; [телеграм] &middot; [дата старта ближайшего потока]</p>
         </div>
     </footer>
 
@@ -1291,7 +1302,7 @@
                     if (!isOpen) {
                         item.classList.add('open');
                         btn.setAttribute('aria-expanded', 'true');
-                        body.style.maxHeight = inner.scrollHeight + 24 + 'px';
+                        body.style.maxHeight = inner.scrollHeight + 20 + 'px';
                     }
                 });
             });
@@ -1300,6 +1311,8 @@
             var form = document.getElementById('signup-form');
             var submitBtn = document.getElementById('submit-btn');
             var statusSuccess = document.getElementById('status-success');
+            var statusValidation = document.getElementById('status-validation');
+            var validationMessage = document.getElementById('validation-message');
             var statusError = document.getElementById('status-error');
             var fallbackText = document.getElementById('fallback-text');
             var btnCopy = document.getElementById('btn-copy');
@@ -1308,6 +1321,7 @@
 
             function hideStatuses() {
                 statusSuccess.classList.remove('show');
+                statusValidation.classList.remove('show');
                 statusError.classList.remove('show');
             }
 
@@ -1383,30 +1397,53 @@
                     })
                         .then(function (response) {
                             if (response.ok) {
-                                return response.json().then(function (result) {
-                                    // Успех
+                                return response.json().then(function () {
+                                    setLoading(false);
                                     form.style.display = 'none';
                                     statusSuccess.classList.add('show');
                                     statusSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                 });
                             }
 
-                            // Ошибка rate limit
+                            // Rate limit
                             if (response.status === 429) {
                                 return response.json().then(function (err) {
-                                    alert(err.detail || 'Слишком много заявок. Попробуйте через несколько минут.');
                                     setLoading(false);
+                                    alert(err.detail || 'Слишком много заявок. Попробуйте через несколько минут.');
                                 });
                             }
 
-                            // Любая другая ошибка — показываем fallback
+                            // Ошибка валидации от сервера
+                            if (response.status === 422 || response.status === 400) {
+                                return response.json().then(function (err) {
+                                    setLoading(false);
+
+                                    // Подсвечиваем поля с ошибками
+                                    if (err.detail && Array.isArray(err.detail)) {
+                                        err.detail.forEach(function (item) {
+                                            var fieldName = item.loc && item.loc[item.loc.length - 1];
+                                            if (fieldName) {
+                                                var field = form.querySelector('[name="' + fieldName + '"]');
+                                                if (field) field.classList.add('error');
+                                            }
+                                        });
+                                        var firstError = form.querySelector('.error');
+                                        if (firstError) firstError.focus();
+                                    }
+
+                                    validationMessage.textContent = 'Проверьте правильность заполнения полей и попробуйте снова.';
+                                    statusValidation.classList.add('show');
+                                    statusValidation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                });
+                            }
+
+                            // Ошибка сервера 500+ — fallback
                             throw new Error('Server error: ' + response.status);
                         })
                         .catch(function (error) {
                             console.error('Submit error:', error);
                             setLoading(false);
 
-                            // Показываем fallback с текстом для копирования
                             fallbackText.textContent = buildFallbackText(data);
                             statusError.classList.add('show');
                             statusError.scrollIntoView({ behavior: 'smooth', block: 'center' });
