@@ -1,11 +1,11 @@
 services:
   backend:
     build: ./backend
-    container_name: ege-backend
+    container_name: backend
     restart: unless-stopped
     env_file: .env
-    expose:
-      - "8000"
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
     networks:
       - app-network
     healthcheck:
@@ -17,11 +17,11 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: ege-frontend
+    container_name: frontend
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "${FRONTEND_PORT:-80}:80"
+      - "${FRONTEND_SSL_PORT:-443}:443"
     depends_on:
       backend:
         condition: service_healthy
@@ -29,6 +29,16 @@ services:
       - app-network
     volumes:
       - ./ssl:/etc/ssl/custom:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+
+  # раскомментировать для автообновления SSL
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 networks:
   app-network:
